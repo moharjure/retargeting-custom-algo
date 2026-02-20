@@ -9,6 +9,7 @@ const EVENT_WEIGHTS = {
     ProductDetailsView: 5,
     Purchase: -100, // negative = exclude purchased products
     MyCustomEvent: 15, // your custom event gets highest priority
+    MyCustomWishlistEvent: 20, // wishlist gets even higher priority
 };
 const DEFAULT_WEIGHT = 1;
 
@@ -108,6 +109,19 @@ const server = http.createServer((req, res) => {
             }
         } else {
             console.log(`\n  >>> No MyCustomEvent found in this request`);
+        }
+
+        // Log MyCustomWishlistEvent details specifically
+        const wishlistEvents = events.filter(e => e.name === 'MyCustomWishlistEvent');
+        if (wishlistEvents.length > 0) {
+            console.log(`\n  >>> MyCustomWishlistEvent details:`);
+            for (const e of wishlistEvents) {
+                console.log(`    timestamp: ${e.timestamp} (${new Date(e.timestamp * 1000).toISOString()})`);
+                console.log(`    data: ${JSON.stringify(e.data)}`);
+                console.log(`    productIds: ${JSON.stringify(e.productIds)}`);
+            }
+        } else {
+            console.log(`\n  >>> No MyCustomWishlistEvent found in this request`);
         }
 
         // Score and rank
