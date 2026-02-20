@@ -1,0 +1,12 @@
+{
+  "name": "retargeting-custom-algo",
+  "version": "1.0.0",
+  "description": "Custom recommendation algorithm debug server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

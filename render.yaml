@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: retargeting-custom-algo
+    runtime: node
+    buildCommand: echo "No build needed"
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
