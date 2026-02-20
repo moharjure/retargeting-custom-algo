@@ -23,7 +23,9 @@ function scoreEvents(events, requestedItems) {
 
     for (const event of events) {
         // Extract product IDs depending on event structure
-        const ids = event.productIds || [];
+        const ids = event.productIds
+            || (event.data?.products?.map(p => p.id))
+            || (event.data?.id ? [event.data.id] : []);
 
         if (event.name === 'Purchase') {
             ids.forEach(id => purchased.add(id));
